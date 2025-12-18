@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignUuid('table_id')->references('id')->on('casino_tables')->onDelete('set null');
+            $table->foreignUuid('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignUuid('table_id')->references('id')->on('casino_tables')->cascadeOnDelete();
             $table->date('booking_date');
             $table->string('time_slot');
             $table->integer('num_seats');

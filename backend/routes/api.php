@@ -1,13 +1,11 @@
 <?php
-// backend/routes/api.php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\TableController;
+use App\Http\Controllers\CasinoTableController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\MembershipTierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +20,13 @@ Route::prefix('auth')->group(function () {
 });
 
 // Public data routes (can be accessed without auth if needed)
-Route::get('/tables', [TableController::class, 'index']);
-Route::get('/tables/{id}', [TableController::class, 'show']);
+Route::get('/tables', [CasinoTableController::class, 'index']);
+Route::get('/tables/{id}', [CasinoTableController::class, 'show']);
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/featured', [EventController::class, 'featured']);
 Route::get('/events/upcoming', [EventController::class, 'upcoming']);
 Route::get('/events/{id}', [EventController::class, 'show']);
-Route::get('/membership/tiers', [MembershipController::class, 'tiers']);
+Route::get('/membership/tiers', [MembershipTierController::class, 'tiers']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -38,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/auth/profile', [AuthController::class, 'updateProfile']);
 
     // Tables
-    Route::get('/tables/available', [TableController::class, 'available']);
+    Route::get('/tables/available', [CasinoTableController::class, 'available']);
 
     // Bookings
     Route::post('/bookings', [BookingController::class, 'store']);
@@ -47,6 +45,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancel']);
 
     // Membership
-    Route::get('/membership/current', [MembershipController::class, 'current']);
-    Route::get('/membership/progress', [MembershipController::class, 'progress']);
+    Route::get('/membership/current', [MembershipTierController::class, 'current']);
+    Route::get('/membership/progress', [MembershipTierController::class, 'progress']);
 });

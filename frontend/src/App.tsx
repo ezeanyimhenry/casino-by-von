@@ -14,9 +14,9 @@ function AppContent() {
     <>
       <Header />
       {currentPage === 'home' && <HomePage />}
-      {/* {currentPage === 'events' && <EventsPage />}
+      {currentPage === 'events' && <EventsPage />}
       {currentPage === 'booking' && <BookingPage />}
-      {currentPage === 'membership' && <MembershipPage />} */}
+      {currentPage === 'membership' && <MembershipPage />}
       <Footer />
     </>
   );

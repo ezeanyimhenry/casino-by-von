@@ -27,6 +27,7 @@ class User extends Authenticatable
         'phone',
         'total_spent',
         'current_tier_id',
+        'role',
     ];
 
     /**
@@ -54,6 +55,30 @@ class User extends Authenticatable
     }
 
     protected $appends = ['membership_tier'];
+
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Scope to get only admin users
+     */
+    public function scopeAdmins($query)
+    {
+        return $query->where('role', 'admin');
+    }
+
+    /**
+     * Scope to get only regular users
+     */
+    public function scopeRegularUsers($query)
+    {
+        return $query->where('role', 'user');
+    }
 
     public function bookings()
     {

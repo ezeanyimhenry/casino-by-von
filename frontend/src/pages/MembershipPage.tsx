@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Award, Crown, Gem, Sparkles, Check } from 'lucide-react';
-import { supabase, MembershipTier } from '../lib/supabase';
+import { membershipApi, MembershipTier } from '../lib/api';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; fill?: string }>> = {
   award: Award,
@@ -19,12 +19,7 @@ export function MembershipPage() {
 
   const fetchTiers = async () => {
     try {
-      const { data, error } = await supabase
-        .from('membership_tiers')
-        .select('*')
-        .order('min_spent', { ascending: true });
-
-      if (error) throw error;
+      const data = await membershipApi.getTiers();
       setTiers(data || []);
     } catch (error) {
       console.error('Error fetching tiers:', error);
@@ -61,11 +56,10 @@ export function MembershipPage() {
             return (
               <div
                 key={tier.id}
-                className={`group relative bg-gradient-to-br from-gray-900 to-black border rounded-xl p-6 transition-all duration-500 transform hover:scale-105 ${
-                  isPremium
+                className={`group relative bg-gradient-to-br from-gray-900 to-black border rounded-xl p-6 transition-all duration-500 transform hover:scale-105 ${isPremium
                     ? 'border-yellow-500 shadow-2xl shadow-yellow-500/20 lg:scale-105'
                     : 'border-yellow-900/30 hover:border-yellow-500/50'
-                }`}
+                  }`}
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}
