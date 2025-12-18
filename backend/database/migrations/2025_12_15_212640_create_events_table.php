@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->timestamp('event_date');
+            $table->dateTime('event_date');
             $table->string('image_url')->nullable();
             $table->string('location')->nullable();
             $table->integer('capacity')->nullable();

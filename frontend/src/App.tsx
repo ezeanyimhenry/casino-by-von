@@ -1,3 +1,4 @@
+import { AuthProvider } from './contexts/AuthContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -13,9 +14,9 @@ function AppContent() {
     <>
       <Header />
       {currentPage === 'home' && <HomePage />}
-      {currentPage === 'events' && <EventsPage />}
+      {/* {currentPage === 'events' && <EventsPage />}
       {currentPage === 'booking' && <BookingPage />}
-      {currentPage === 'membership' && <MembershipPage />}
+      {currentPage === 'membership' && <MembershipPage />} */}
       <Footer />
     </>
   );
@@ -23,9 +24,11 @@ function AppContent() {
 
 function App() {
   return (
-    <NavigationProvider>
-      <AppContent />
-    </NavigationProvider>
+    <AuthProvider>
+      <NavigationProvider>
+        <AppContent />
+      </NavigationProvider>
+    </AuthProvider>
   );
 }
 

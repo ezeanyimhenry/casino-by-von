@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->decimal('min_spent', 8, 2);
             $table->decimal('max_spent', 8, 2);
-            $table->jsonb('benefits');
+            $table->json('benefits');
             $table->string('color')->nullable();
             $table->string('icon')->nullable();
             $table->integer('discount_percentage')->default(0);
